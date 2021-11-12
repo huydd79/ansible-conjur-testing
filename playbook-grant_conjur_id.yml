@@ -1,0 +1,9 @@
+- hosts: servers
+  roles:
+    - role: cyberark.conjur-host-identity
+      conjur_appliance_url: 'https://conjur1.huydo.net'
+      conjur_account: 'HUYDO'
+      conjur_host_factory_token: "{{ lookup('env', 'HFTOKEN') }}"
+      conjur_host_name: "{{ inventory_hostname }}"
+      conjur_ssl_certificate: "{{ lookup('file', '/etc/conjur.pem') }}"
+      conjur_validate_certs: false
