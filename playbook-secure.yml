@@ -1,0 +1,17 @@
+- hosts: demohosts
+  vars:
+      ansible_connection: ssh
+      ansible_host: "{{inventory_hostname}}"
+      ansible_user: "{{ lookup('cyberark.conjur.conjur_variable', 'pam/sync1/servers/' + inventory_hostname +'/username', validate_certs=false) }}"
+      ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'pam/sync1/servers/' + inventory_hostname +'/password', validate_certs=false) }}"
+
+  tasks:
+    - name: Get user name
+      shell: whoami
+      register: theuser
+
+    - name: Get host name
+      shell: hostname
+      register: thehost
+
+    - debug: msg="I am {{ theuser.stdout }} at {{ thehost.stdout }}"
