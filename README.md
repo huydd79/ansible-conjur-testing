@@ -14,7 +14,9 @@ https://docs.conjur.org/Latest/en/Content/Integrations/ansible.html
 #### Granting conjur role to ansible host
 - Getting host factory token from conjur environment (using conjur cli docker version or generating from Conjur Enterprise Admin GUI)
 - Exporting host factory token as environment parameter
-export HFTOKEN=<host_factory_token_value>
+`export HFTOKEN=<host_factory_token_value>`
+- Generating conjur certificate file 
+`$sudo echo | openssl s_client -connect https://<conjur-host> 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' >/etc/conjur.pem`
 - Running grant_conjur_id playbook `run_ansible-grant_conjur_id.sh`
 - Checking for result:
   + New hostID created in conjur environment
