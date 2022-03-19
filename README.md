@@ -16,7 +16,7 @@ https://docs.conjur.org/Latest/en/Content/Integrations/ansible.html
 - Exporting host factory token as environment parameter
 `export HFTOKEN=<host_factory_token_value>`
 - Generating conjur certificate file 
-`$sudo echo | openssl s_client -connect https://<conjur-host> 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' >/etc/conjur.pem`
+`$sudo echo | openssl s_client -connect <conjur-host>:<port> 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' >/etc/conjur.pem`
 - Running grant_conjur_id playbook `run_ansible-grant_conjur_id.sh`
 - Checking for result:
   + New hostID created in conjur environment
